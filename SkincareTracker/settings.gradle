@@ -1,0 +1,3 @@
+rootProject.name = 'SkincareTracker'
+
+includeFlat 'JPASkincare'
