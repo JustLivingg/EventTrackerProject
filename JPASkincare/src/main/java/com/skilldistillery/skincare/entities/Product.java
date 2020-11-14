@@ -1,5 +1,8 @@
 package com.skilldistillery.skincare.entities;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +16,19 @@ public class Product {
 	private int id;
 	
 	private String brand;
+
+	private String name;
 	
-	private String type;
+	private int size;
+	
+	@Column(name="expiration_date")
+	private LocalDateTime expirationDate;
+	
+	private String timeuse;
+	
+	private int quantity;
+	
+	private String texture;
 
 	public int getId() {
 		return id;
@@ -32,17 +46,63 @@ public class Product {
 		this.brand = brand;
 	}
 
-	public String getType() {
-		return type;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public LocalDateTime getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(LocalDateTime expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getTimeuse() {
+		return timeuse;
+	}
+
+	public void setTimeuse(String timeuse) {
+		this.timeuse = timeuse;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getTexture() {
+		return texture;
+	}
+
+	public void setTexture(String texture) {
+		this.texture = texture;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", brand=" + brand + ", type=" + type + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Product [id=").append(id).append(", brand=").append(brand).append(", name=").append(name)
+				.append(", size=").append(size).append(", expirationDate=").append(expirationDate).append(", timeuse=")
+				.append(timeuse).append(", quantity=").append(quantity).append(", texture=").append(texture)
+				.append("]");
+		return builder.toString();
 	}
 
 	public Product() {

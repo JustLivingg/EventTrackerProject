@@ -45,7 +45,12 @@ class ProductTest {
 	void test() {
 		assertNotNull(product);
 		assertEquals("Naturium", product.getBrand());
-		assertEquals("Retinol", product.getType());
+		assertEquals("Retinol Complex Serum", product.getName());
+		assertEquals(30, product.getSize());
+		assertEquals(2021, product.getExpirationDate().getYear());
+		assertEquals("PM", product.getTimeuse());
+		assertEquals(1, product.getQuantity());
+		assertEquals("Serum", product.getTexture());
 	}
 
 }

@@ -8,7 +8,11 @@ public interface SkincareService {
 
 	List<Product> getAllProducts();
 	
+	public Product findById(Integer productId);
+	
 	public Product createProduct(Product product);
+	
+	public Product updateProduct(Integer productId, Product product);
 	
 	public boolean delete(Integer productId);
 }
