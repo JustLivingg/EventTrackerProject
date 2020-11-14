@@ -11,18 +11,50 @@ I decided to make a RESTful Services event tracker on my girlfriends Skincare pr
 This foundations of this project is REST API and eventually will be integrated with an Angular front end with Javascript.  
 
 ### Using the site with POSTMAN
-- (GET) Get all
-  - http://localhost:8084/api/products
-- (GET) Get product by Id.
-  - http://localhost:8084/api/products/{productId}
-- (POST) Add/Create product
-  - http://localhost:8084/api/products
-- (PUT) Update product
-  - http://localhost:8084/api/products/{productId}
-- (DEL) Delete product
-  - http://localhost:8084/api/products/{productId}
+- Get all
+  ```
+  GET http://localhost:8084/api/products
+  ```
+- Get product by Id.
+  ```
+  GET http://localhost:8084/api/products/{productId}
+  ```
+- Add/Create product
+  ```
+  POST http://localhost:8084/api/products
+  ```
+- Update product
+  ```
+  PUT http://localhost:8084/api/products/{productId}
+  ```
+- Delete product
+  ```
+  DEL ttp://localhost:8084/api/products/{productId}
+  ```
+
+Example JSON for updating Product
+
+```
+{
+    "brand": "CeraVe",
+    "name": "Moisturizing Cream",
+    "size": 539,
+    "expirationDate": "2021-04-02T23:00:00",
+    "timeuse": "AM/PM",
+    "quantity": 1,
+    "texture": "Cream"
+}
+```
 
 The last added product was 22, so the next product added will be 23.
+
+Database Structure
+
+![ER Diagram](SD/Java/EventTracker/pictures/dbtable.png)
+
+Default SQL Database
+
+![SQL Table](SD/Java/EventTracker/pictures/mysqldb.png)
 
 ### Technologies Used
 - Spring Boot, Sprint REST, Spring Tool Suite
