@@ -76,7 +76,7 @@ public class SkincareServiceImpl implements SkincareService {
 		Optional<Product> prodOpt = repo.findById(productId);
 		if (prodOpt.isPresent()) {
 			repo.delete(prodOpt.get());
-			repo.deleteById(productId);
+//			repo.deleteById(productId);
 			deleted = true;
 		}
 		return deleted;

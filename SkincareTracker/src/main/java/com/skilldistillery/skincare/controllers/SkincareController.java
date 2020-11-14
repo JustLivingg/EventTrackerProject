@@ -82,6 +82,7 @@ public class SkincareController {
 				response.setStatus(404);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		response.setStatus(400);
 		}
 	}
