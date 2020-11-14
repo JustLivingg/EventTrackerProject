@@ -50,11 +50,11 @@ The last added product was 22, so the next product added will be 23.
 
 Database Structure
 
-![ER Diagram](jliv/SD/Java/EventTracker/pictures/dbtable.png)
+![ER Diagram](SD/Java/EventTracker/pictures/dbtable.jpg)
 
 Default SQL Database
 
-![SQL Table](jliv/SD/Java/EventTracker/pictures/mysqldb.png)
+![SQL Table](SD/Java/EventTracker/pictures/mysqldb.jpg)
 
 ### Technologies Used
 - Spring Boot, Sprint REST, Spring Tool Suite
