@@ -12,7 +12,7 @@ function init() {
 	console.log('in init()');
 	//TODO: Set up event listeners for buttons.
 	//Find product By ID ------------------
-	document.productForm.lookup.addEventListener('click', function(event) {
+	document.productForm.productButton.addEventListener('click', function(event) {
 		event.preventDefault();
 		var productId = document.productForm.productId.value;
 		if (!isNaN(productId) && productId > 0) {
@@ -47,12 +47,12 @@ function init() {
 	// });
 
 	//Delete Product ----------------------
-	// document.productForm.deleteProductButton.addEventListener('click', function(e) {
-	// 	e.preventDefault();
-	// 	console.log('Product deleted.');
-	// 	let productId = document.productForm.productId.value;
-	// 	deleteProduct(productId);
-	// });
+	document.productForm.deleteProductButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log('Product deleted.');
+		let productId = document.productForm.productId.value;
+		deleteProduct(productId);
+	});
 
 };
 
@@ -222,14 +222,13 @@ function addProduct(e) {
 };
 
 
-function deleteProduct(event) {
-	event.preventDefault();
+function deleteProduct(productId) {
 		let xhr = new XMLHttpRequest();
-		xhr.open("DELETE", "api/products/" + this.product.id, true);
-		xhr.onload = function() {
-			if (xhr.readyState === 4 && xhr.status > 199 && xhr.status < 300) {
-				console.log("success");
-				showAllSites();
+		xhr.open("DELETE", "api/products/" + productId, true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status < 400) {
+				let data = JSON.parse(xhr.responseText);
+				console.log('Successfully deleted Product.')
 				} else {
 				console.error("delete failed");
 			}
