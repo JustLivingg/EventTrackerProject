@@ -1,21 +1,24 @@
 window.addEventListener('load', function(){
 	console.log('Script loaded');
-	
-	showAllProducts();
+	getAllProducts();
+	init();
 	
 });
 
 
 function init() {
-	console.log('in init()fasdjaklsjdlakdjwlkjakljsda');
+	
+	
+	console.log('in init()');
 	//TODO: Set up event listeners for buttons.
-	// Find product By ID ------------------
-	document.productForm.productButton.addEventListener('click', function (e) {
-		e.preventDefault();
-		console.log('Product ID found!');
-		letProductId = document.productForm.productId.value;
+	//Find product By ID ------------------
+	document.productForm.lookup.addEventListener('click', function(event) {
+		event.preventDefault();
+		var productId = document.productForm.productId.value;
+		if (!isNaN(productId) && productId > 0) {
 		findById(productId);
-	});
+		}
+	  });
 
 	//Create Product -----------------------
 
@@ -26,30 +29,30 @@ function init() {
 
 
 	//Update Product ----------------
-	let updateProductButton = document.getElementById('updateProductButton');
-	updateProductButton.addEventListener('click', function(e) {
-		e.preventDefault();
-		console.log('Updated Product.');
-		let form = document.createProductForm;
-		var updatedProductData = {
-			brand: form.brand.value,
-			name: form.name.value,
-			size: form.size.value,
-			expirationDate: form.expirationDate.value,
-			timeuse: form.timeuse.value,
-			quantity: form.quantity.value,
-			texture: form.texture.value
-		}
-		updateProduct(form.id.value, updatedProductData);
-	});
+	// let updateProductButton = document.getElementById('updateProductButton');
+	// updateProductButton.addEventListener('click', function(e) {
+	// 	e.preventDefault();
+	// 	console.log('Updated Product.');
+	// 	let form = document.createProductForm;
+	// 	var updatedProductData = {
+	// 		brand: form.brand.value,
+	// 		name: form.name.value,
+	// 		size: form.size.value,
+	// 		expirationDate: form.expirationDate.value,
+	// 		timeuse: form.timeuse.value,
+	// 		quantity: form.quantity.value,
+	// 		texture: form.texture.value
+	// 	}
+	// 	updateProduct(form.id.value, updatedProductData);
+	// });
 
 	//Delete Product ----------------------
-	document.productForm.deleteProductButton.addEventListener('click', function(e) {
-		e.preventDefault();
-		console.log('Product deleted.');
-		let productId = document.productForm.productId.value;
-		deleteProduct(productId);
-	});
+	// document.productForm.deleteProductButton.addEventListener('click', function(e) {
+	// 	e.preventDefault();
+	// 	console.log('Product deleted.');
+	// 	let productId = document.productForm.productId.value;
+	// 	deleteProduct(productId);
+	// });
 
 };
 
@@ -58,25 +61,49 @@ function init() {
 
 function findById(productId) {
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', "api/products/" + productId, true);
+	xhr.open('GET', "api/products/" + productId);
 	xhr.onreadystatechange = function() {
 		console.log(JSON.stringify(xhr));
 		if (xhr.status < 400 && xhr.readyState === 4) {
 			console.log(xhr.responseText);
 			if (xhr.responseText) {
 				let product = JSON.parse(xhr.responseText);
-				return product;
+				displayProduct(product);
 			} else {
-				console.log("Find by Id is currently not working.");
+				console.log("Product not found.");
+				displayError("Product not found.")
 			}
 		}
 	}
 	xhr.send(null);
 };
 
-function showAllProducts() {
+function displayError(msg) {
+	let div = document.getElementById('productData');
+	div.textContent = msg;
+  };
+
+function displayProduct(product) {
+	let dataDiv = document.getElementById('productData');
+	dataDiv.textContent='';
+	let h3 =document.createElement('h3');
+	h3.textContent = product.brand;
+	dataDiv.appendChild(h3);
+	let ul = document.createElement('ul');
+	let li = document.createElement('li');
+	li.textContent = product.name;
+	ul.appendChild(li);
+	li = document.createElement('li');
+	li.textContent = product.size;
+	ul.appendChild(li);
+	li = document.createElement('li');
+	li.textContent = product.expirationDate;
+	dataDiv.appendChild(ul);
+}
+
+function getAllProducts() {
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', "api/products/", true);
+	xhr.open('GET', "api/products/");
 	xhr.onreadystatechange = function() {
 		if (xhr.status < 400 && xhr.readyState === 4) {
 			if (xhr.responseText) {
@@ -87,16 +114,11 @@ function showAllProducts() {
 				console.log("Show all products is currently broken.");
 			}
 		}
-	}
-	xhr.send(null);
-};
+	};
+	xhr.send();
+}
 
 function displayProducts(products) {
-	// var products = [
-	// 	{"id":1,
-	// 	"brand":"Naturium",
-	// 	"name":"Retinol Complex Serum","size":30,"expirationDate":"2021-04-02T23:00:00","timeuse":"PM","quantity":1,"texture":"Serum"},{"id":2,"brand":"Naturium","name":"Niacinamide Serum 12%","size":30,"expirationDate":"2021-04-02T23:00:00","timeuse":"AM/PM","quantity":1,"texture":"Serum"},{"id":3,"brand":"Naturium","name":"Vitamin C Complex Serum","size":30,"expirationDate":"2021-04-02T23:00:00","timeuse":"AM","quantity":1,"texture":"Serum"}
-	// ];
 	var table = document.createElement('table');
 	table.style.border = 'solid';
 	var head = document.createElement('thead');
@@ -186,7 +208,7 @@ function addProduct(e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 201 || xhr.status === 200) {
         let savedProduct = JSON.parse(xhr.responseText);
-        showAllProducts();
+        getAllProducts();
       }
       else {
         console.error('Error creating product, status=' + xhr.status);
