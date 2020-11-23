@@ -81,4 +81,5 @@ public class SkincareServiceImpl implements SkincareService {
 		}
 		return deleted;
 	}
+
 }

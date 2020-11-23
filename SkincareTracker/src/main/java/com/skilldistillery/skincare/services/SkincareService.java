@@ -15,4 +15,5 @@ public interface SkincareService {
 	public Product updateProduct(Integer productId, Product product);
 	
 	public boolean delete(Integer productId);
+	
 }

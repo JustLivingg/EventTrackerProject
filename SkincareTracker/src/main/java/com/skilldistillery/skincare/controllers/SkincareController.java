@@ -86,4 +86,5 @@ public class SkincareController {
 		response.setStatus(400);
 		}
 	}
+
 }
