@@ -29,22 +29,22 @@ function init() {
 
 
 	//Update Product ----------------
-	// let updateProductButton = document.getElementById('updateProductButton');
-	// updateProductButton.addEventListener('click', function(e) {
-	// 	e.preventDefault();
-	// 	console.log('Updated Product.');
-	// 	let form = document.createProductForm;
-	// 	var updatedProductData = {
-	// 		brand: form.brand.value,
-	// 		name: form.name.value,
-	// 		size: form.size.value,
-	// 		expirationDate: form.expirationDate.value,
-	// 		timeuse: form.timeuse.value,
-	// 		quantity: form.quantity.value,
-	// 		texture: form.texture.value
-	// 	}
-	// 	updateProduct(form.id.value, updatedProductData);
-	// });
+	let updateProductButton = document.getElementById('updateProductButton');
+	updateProductButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log('Updated Product.');
+		let form = document.createProductForm;
+		var updatedProductData = {
+			brand: form.brand.value,
+			name: form.name.value,
+			size: form.size.value,
+			expirationDate: form.expirationDate.value,
+			timeuse: form.timeuse.value,
+			quantity: form.quantity.value,
+			texture: form.texture.value
+		}
+		updateProduct(form.id.value, updatedProductData);
+	});
 
 	//Delete Product ----------------------
 	document.productForm.deleteProductButton.addEventListener('click', function(e) {
@@ -220,6 +220,10 @@ function addProduct(e) {
   xhr.setRequestHeader('Content-type','application/json')
   xhr.send(JSON.stringify(newProduct));
 };
+
+function updatedProduct() {
+
+}
 
 
 function deleteProduct(productId) {
