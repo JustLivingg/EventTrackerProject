@@ -28,7 +28,7 @@ function init() {
 	  });
 
 
-	//Update Product ----------------
+	// Update Product ----------------
 	let updateProductButton = document.getElementById('updateProductButton');
 	updateProductButton.addEventListener('click', function(e) {
 		e.preventDefault();
